@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    android:fitsSystemWindows="false"
+    tools:context=".ShopDetails">
+
+    <!-- ScrollView to make the shop details and RecyclerView scrollable -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/new_order_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Shimmer Layout for Shop Details Card -->
+            <include
+                android:id="@+id/shimmer_view_container"
+                layout="@layout/shop_skeleton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/shop_details_card"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5">
+                    <!-- Shop Image -->
+                    <ImageView
+                        android:id="@+id/shop_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_placeholder" />
+
+                    <!-- Header Layout Overlay -->
+                    <include
+                        android:id="@+id/phone_header"
+                        layout="@layout/auth_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="15dp" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:paddingVertical="5dp"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.4"
+                        android:gravity="left"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_shop_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shop Name" />
+
+                        <TextView
+                            android:id="@+id/txt_delivery_charges"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.5"
+                            android:text="-- Rs"
+                            android:textColor="@color/light_gray"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/txt_delivery_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.5"
+                            android:text="0-0 min"
+                            android:textColor="@color/light_gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/shop_details_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="0.6"
+                        android:gravity="right"
+                        android:orientation="vertical"
+                        android:paddingBottom="4dp"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:id="@+id/shop_ratings_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="right|bottom"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/cmd_add_to_fav"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="7dp"
+                                android:background="@drawable/background_rounded_gray"
+                                android:foregroundGravity="center"
+                                android:padding="6dp"
+                                android:scaleType="centerInside"
+                                app:srcCompat="@drawable/heart_outline_24" />
+
+                            <LinearLayout
+                                android:id="@+id/ratings_container"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ratings_rounded"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp">
+
+                                <ImageView
+                                    android:id="@+id/img_rating_star"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:srcCompat="@drawable/star_enabled_24" />
+
+                                <TextView
+                                    android:id="@+id/txt_ratings"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:layout_weight="1"
+                                    android:text="0.0" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_prev_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Your Previous Orders"
+                android:textColor="@color/light_black"
+                android:textSize="19dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/previous_orders"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:scrollbars="none" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Fixed Button at the Bottom -->
+    <LinearLayout
+        android:id="@+id/new_order_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.cardview.widget.CardView
+            style="@style/BtnContainerCard2"
+            android:layout_marginBottom="0dp">
+
+            <Button
+                android:id="@+id/cmd_new_order"
+                style="@style/CustomButtonStyle"
+                android:text="New Order" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

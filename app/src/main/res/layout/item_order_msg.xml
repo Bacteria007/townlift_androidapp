@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginBottom="8dp"
+    android:gravity="start"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/message_item_root"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/msg_background"
+        android:maxWidth="250dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp">
+
+        <TextView
+            android:id="@+id/txt_order_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, World!"
+            android:textColor="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/dashed_line" />
+
+        <TextView
+            android:id="@+id/txt_order_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, World!"
+            android:textColor="@android:color/black" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/dashed_line" />
+
+        <TextView
+            android:id="@+id/txt_grand_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grand Total: 1030 RS"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/txt_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:text="3:00 am"
+            android:textColor="@color/light_black"
+            android:textSize="8sp" />
+    </LinearLayout>
+</LinearLayout>

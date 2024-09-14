@@ -1,0 +1,37 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Townlift.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="android:colorAccent">@color/input_label_color</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/text_control</item>
+        <item name="colorControlHighlight">@color/dark_blue</item>
+        <item name="android:textColorHighlight">@color/text_control</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14dp</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/grad_blue</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:forceDarkAllowed">false</item> <!-- Keep app in light mode -->
+
+    </style>
+
+    <style name="Theme.WhiteTextStatusBar" parent="Base.Theme.Townlift.Light">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- White text -->
+        <item name="android:forceDarkAllowed">false</item> <!-- Keep app in light mode -->
+    </style>
+    <!-- Custom theme for transparent status bar -->
+    <style name="Theme.TransparentStatusBar" parent="Base.Theme.Townlift.Light">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="Theme.Townlift.Light" parent="Base.Theme.Townlift.Light" />
+</resources>

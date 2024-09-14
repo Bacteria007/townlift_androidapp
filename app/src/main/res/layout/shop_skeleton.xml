@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shop_details_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:visibility="visible">
+
+        <!-- Shop Details Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5">
+                <!-- Shop Image -->
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/shimmer_content_color"
+                    android:scaleType="centerCrop" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingVertical="5dp"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.4"
+                    android:gravity="left|center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="15dp"
+                        android:background="@color/shimmer_content_color"
+                        android:text="" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="15dp"
+                        android:layout_marginVertical="5dp"
+                        android:background="@color/shimmer_content_color"
+                        android:text=""
+
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="70dp"
+                        android:layout_height="15dp"
+                        android:background="@color/shimmer_content_color"
+                        android:text=""
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="0.6"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:paddingBottom="4dp"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right|bottom"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ratings_rounded"
+                            android:backgroundTint="@color/shimmer_content_color"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@color/shimmer_content_color" />
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:layout_weight="1"
+                                android:background="@color/shimmer_content_color"
+                                android:text="" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+</LinearLayout>

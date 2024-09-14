@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Townlift.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="android:colorAccent">@color/input_label_color</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/text_control</item>
+        <item name="colorControlHighlight">@color/dark_blue</item>
+        <item name="android:textColorHighlight">@color/text_control</item>
+        <item name="rippleColor">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/grad_blue</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="Theme.TransparentStatusBar" parent="Base.Theme.Townlift.Dark">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+    <style name="Theme.Townlift.Dark" parent="Base.Theme.Townlift.Dark" />
+</resources>

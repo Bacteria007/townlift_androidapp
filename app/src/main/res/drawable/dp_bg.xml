@@ -1,0 +1,18 @@
+    <!-- res/drawable/dp_bg.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+android:shape="oval">
+<solid android:color="#142096F5" />
+</shape>
+<!--<vector xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:width="68dp"-->
+<!--    android:height="68dp"-->
+<!--    android:viewportWidth="68"-->
+<!--    android:viewportHeight="68">-->
+<!--  <path-->
+<!--      android:pathData="M67.2,33.6C67.2,52.157 52.157,67.2 33.6,67.2C15.043,67.2 0,52.157 0,33.6C0,15.043 15.043,0 33.6,0C52.157,0 67.2,15.043 67.2,33.6ZM5.523,33.6C5.523,49.106 18.094,61.677 33.6,61.677C49.106,61.677 61.677,49.106 61.677,33.6C61.677,18.094 49.106,5.523 33.6,5.523C18.094,5.523 5.523,18.094 5.523,33.6Z"-->
+<!--      android:strokeAlpha="0.08"-->
+<!--      android:fillColor="#2096F5"-->
+<!--      android:fillAlpha="0.08"/>-->
+<!--</vector>-->
+
+

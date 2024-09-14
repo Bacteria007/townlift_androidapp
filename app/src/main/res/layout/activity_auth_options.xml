@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".AuthOptions">
+
+    <LinearLayout
+        android:id="@+id/auth_options_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Townlift"
+            android:textColor="@color/dark_blue"
+            android:textSize="76sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/google_card"
+            style="@style/BtnContainerCard"
+            app:cardCornerRadius="12dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:id="@+id/cmd_continue_google"
+                style="@style/BtnInsideLinearLayout">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/google" />
+
+                <TextView
+                    style="@style/BtnTitle"
+                    android:text="Continue with Google" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!--Continue with Phone btn -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/phone_card"
+            style="@style/BtnContainerCard"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:id="@+id/cmd_continue_phone"
+                style="@style/BtnInsideLinearLayout">
+
+
+                <ImageView
+                    android:id="@+id/phone_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/phone_icon" />
+
+                <TextView
+                    style="@style/BtnTitle"
+                    android:text="Continue with Phone" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/biometric_card"-->
+<!--            style="@style/BtnContainerCard"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:cardCornerRadius="12dp"-->
+<!--            app:cardUseCompatPadding="true">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/cmd_continue_biometric"-->
+<!--                style="@style/BtnInsideLinearLayout">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/biometric_icon"-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="24dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:src="@drawable/ic_biometric" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/BtnTitle"-->
+<!--                    android:text="Login with Fingerprint" />-->
+<!--            </LinearLayout>-->
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:id="@+id/facebook_card"-->
+<!--            style="@style/BtnContainerCard"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:cardCornerRadius="12dp"-->
+<!--            app:cardUseCompatPadding="true">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/cmd_continue_facebook"-->
+<!--                style="@style/BtnInsideLinearLayout">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    android:src="@drawable/facebook" />-->
+
+<!--                <TextView-->
+<!--                    style="@style/BtnTitle"-->
+<!--                    android:text="Continue with Facebook" />-->
+<!--            </LinearLayout>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/login_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            style="@style/AuthBottomText"
+            android:text="Already have an account?"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/txt_goto_login"
+            style="@style/SmallBlueText"
+            android:layout_marginStart="8dp"
+            android:text="Login" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

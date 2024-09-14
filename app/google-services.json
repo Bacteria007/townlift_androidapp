@@ -1,0 +1,113 @@
+{
+  "project_info": {
+    "project_number": "157564680114",
+    "project_id": "eshopping-7f2f1",
+    "storage_bucket": "eshopping-7f2f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157564680114:android:2e75e31de3fa8c674856ab",
+        "android_client_info": {
+          "package_name": "com.deliveryman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157564680114-bia7mqdeucuicdb06vcuk7rgakfhdcp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAntvpYJe_k-FNUUxYkmPyPEMSad8-BDWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157564680114-bia7mqdeucuicdb06vcuk7rgakfhdcp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157564680114:android:c64372cda667beab4856ab",
+        "android_client_info": {
+          "package_name": "com.townlift.townlift_customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157564680114-jqhhfiflalgjrq9u8lc1tnpd2jfbfmk1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.townlift.townlift_customer",
+            "certificate_hash": "3407b4f1b5fb012ab8b2297055406ac147993086"
+          }
+        },
+        {
+          "client_id": "157564680114-bia7mqdeucuicdb06vcuk7rgakfhdcp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAntvpYJe_k-FNUUxYkmPyPEMSad8-BDWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157564680114-bia7mqdeucuicdb06vcuk7rgakfhdcp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157564680114:android:2a88e935b1f9f80e4856ab",
+        "android_client_info": {
+          "package_name": "com.townliftapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157564680114-i04kkr6dlkmbuopdak8kjibjtnv3hi77.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.townliftapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "157564680114-bia7mqdeucuicdb06vcuk7rgakfhdcp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAntvpYJe_k-FNUUxYkmPyPEMSad8-BDWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157564680114-bia7mqdeucuicdb06vcuk7rgakfhdcp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

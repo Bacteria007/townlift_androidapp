@@ -12,56 +12,83 @@
         android:id="@+id/message_item_root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/msg_background"
-        android:maxWidth="250dp"
-        android:orientation="vertical"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="5dp">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/message_item_container"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:background="@drawable/msg_background"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp">
+
+            <TextView
+                android:id="@+id/txt_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="250dp"
+                android:text="Hello, World! This is a very long message to test the max width long message to test the max width constraint."
+                android:textColor="@android:color/black" />
+
+            <View
+                android:id="@+id/dashed_line1"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/dashed_line"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_order_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="250dp"
+
+                android:text="Order Details gffhjkl; dkh   ds df f f dfs f  f f d s ds  dg  g sg sg gs g g g g s gg g g f"
+                android:textColor="@android:color/black"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/dashed_line2"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/dashed_line"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_grand_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="250dp"
+
+                android:text="Grand Total: 1030 RS"
+                android:textColor="@android:color/black"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_message_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:maxWidth="250dp"
+
+                android:text="10:00 AM"
+                android:textColor="@color/light_black"
+                android:textSize="8sp" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/txt_message"
+            android:id="@+id/txt_check_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello, World!"
-            android:textColor="@android:color/black" />
-
-        <View
-            id="@+id/dashed_line1"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/dashed_line"
+            android:layout_gravity="end"
+            android:layout_marginVertical="4dp"
+            android:background="@drawable/corners_rounded"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="2dp"
+            android:text="Check Order"
+            android:textSize="10sp"
             android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txt_order_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order Total"
-            android:textColor="@android:color/black"
-            android:visibility="gone" />
-
-        <View
-            id="@+id/dashed_line2"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/dashed_line"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txt_grand_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grand Total: 1030 RS"
-            android:textColor="@android:color/black"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/txt_message_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:text="Hello, World!"
-            android:textColor="@color/light_black"
-            android:textSize="8sp" />
     </LinearLayout>
 </LinearLayout>

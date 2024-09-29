@@ -1,10 +1,13 @@
 package com.townlift.townlift_customer;
 
+import static com.townlift.townlift_customer.services.URLConstants.ADD_SHOP_TO_FAVORITES_URL;
+import static com.townlift.townlift_customer.services.URLConstants.REMOVE_SHOP_FROM_FAVORITES_URL;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView txtGreeting, txtUserName;
     private ImageView cmdLogout;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,19 +59,21 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
 
         txtGreeting = findViewById(R.id.txt_greeting);
         txtUserName = findViewById(R.id.txt_user_name);
-        cmdLogout = findViewById(R.id.cmd_logout);
+//        cmdLogout = findViewById(R.id.cmd_logout);
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String userName = sharedPreferences.getString("name", "");
         txtUserName.setText(userName);
+        userId = sharedPreferences.getInt("id", -1);
 
-        cmdLogout.setOnClickListener(v -> {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-            Intent intent = new Intent(MainActivity.this, AuthOptions.class);
-            startActivity(intent);
-            finish();
-        });
+
+//        cmdLogout.setOnClickListener(v -> {
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            editor.clear();
+//            editor.apply();
+//            Intent intent = new Intent(MainActivity.this, AuthOptions.class);
+//            startActivity(intent);
+//            finish();
+//        });
         // Update greeting based on the time of day
         updateGreetingBasedOnTime();
 
@@ -97,21 +103,21 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
         }
 
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
-
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            // Fetch data when pull-to-refresh is triggered
+            fetchShopsFromServer();
+        });
         // Initialize RecyclerView
         recyclerView = findViewById(R.id.available_shops);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize Adapter with the shopList
-        shopAdapter = new ShopAdapter(shopList, this);
+        shopAdapter = new ShopAdapter(shopList, this, this);
         recyclerView.setAdapter(shopAdapter);
 
-        // Set the refresh listener for SwipeRefreshLayout
-        swipeRefreshLayout.setOnRefreshListener(this::fetchShopsFromServer);
-
-        // Fetch data from the server
         fetchShopsFromServer();
     }
+
 
     private void updateGreetingBasedOnTime() {
         Calendar calendar = Calendar.getInstance();
@@ -128,11 +134,58 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
         }
     }
 
+    public void apiAddShopToFavorites(int shopId, Runnable onSuccess) {
+        String url = ADD_SHOP_TO_FAVORITES_URL + userId + '/' + shopId;
+
+        // Use ServiceProvider for API call
+        ServiceProvider.getInstance(this).sendPostRequest(
+                this,
+                url,
+                null,
+                data -> {
+                    // On success, run the provided callback
+                    onSuccess.run();
+                },
+                error -> {
+                    // Handle error (show an error message if needed)
+                    SnackbarUtils.showErrorSnackbar(this, "Failed to add shop to favorites");
+                    error.printStackTrace();
+                }
+        );
+    }
+
+    public void apiRemoveShopFromFavorites(int shopId, Runnable onSuccess) {
+        String url = REMOVE_SHOP_FROM_FAVORITES_URL + userId + '/' + shopId;
+
+        // Use ServiceProvider for API call
+        ServiceProvider.getInstance(this).sendPostRequest(
+                this,
+                url,
+                null,
+                data -> {
+                    // On success, run the provided callback
+                    onSuccess.run();
+                },
+                error -> {
+                    // Handle error (show an error message if needed)
+                    SnackbarUtils.showErrorSnackbar(this, "Failed to remove shop from favorites");
+                    error.printStackTrace();
+                }
+        );
+    }
+
+
     private void fetchShopsFromServer() {
         // Show refresh animation
         swipeRefreshLayout.setRefreshing(true);
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        int userid = sharedPreferences.getInt("id", -1);
+        if (userid == -1) {
+            SnackbarUtils.showErrorSnackbar(this, "Invalid User ID");
+            return;
+        }
 
-        String url = URLConstants.GET_ALL_SHOPS_URL;
+        String url = URLConstants.GET_ALL_SHOPS_URL + userid;
 
         ServiceProvider.getInstance(this).sendPostRequest(
                 this,
@@ -142,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
                     try {
                         if (data instanceof JSONArray) {
                             JSONArray jsonArrayResponse = (JSONArray) data;
+                            Log.d("MainActivity", "All Shops Response: " + jsonArrayResponse.toString());
                             if (jsonArrayResponse.length() == 0) {
                                 showNoShopsAvailableAnimation();
                                 swipeRefreshLayout.setRefreshing(false);  // Stop the refresh animation
@@ -159,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
                                 }
                             }
 
-                            // Notify the adapter that data has changed
                             shopAdapter.notifyDataSetChanged();
                             swipeRefreshLayout.setRefreshing(false);  // Stop the refresh animation
 
@@ -202,11 +255,6 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
         try {
             Intent intent = new Intent(MainActivity.this, ShopDetails.class);
             intent.putExtra("id", selectedShop.getInt("id"));
-            intent.putExtra("name", selectedShop.getString("name"));
-            intent.putExtra("image", selectedShop.getString("image"));
-            intent.putExtra("delivery_fee", selectedShop.getString("delivery_fee"));
-            intent.putExtra("delivery_time", selectedShop.getString("delivery_time"));
-            intent.putExtra("average_rating", selectedShop.getString("average_rating"));
             startActivity(intent);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -217,5 +265,5 @@ public class MainActivity extends AppCompatActivity implements ShopAdapter.OnIte
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         return sharedPreferences.getString("profile_url", null); // Replace "profileUrl" with your actual key
     }
-}
 
+}

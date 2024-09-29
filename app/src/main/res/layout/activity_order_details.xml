@@ -110,7 +110,7 @@
                             android:text="Shop Name" />
 
                         <TextView
-                            android:id="@+id/cmd_rate_order"
+                            android:id="@+id/txt_rate_order"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
@@ -134,10 +134,10 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="10dp"
                 android:id="@+id/order_chat_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/order_details_container" />
@@ -150,7 +150,7 @@
                 app:cardElevation="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+               app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -161,19 +161,18 @@
                     <TextView
                         android:id="@+id/txt_order_status"
                         android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="18dp"
-                        android:backgroundTint="@android:color/white"
                         android:gravity="top"
-                        android:padding="0dp"
+                        android:paddingHorizontal="6dp"
+                        android:paddingVertical="2dp"
                         android:text="IN PROGRESS"
                         android:textColor="@color/dark_blue"
                         android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/corners_rounded"
-                        app:rippleColor="@android:color/transparent" />
+                        android:background="@drawable/corners_rounded" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"

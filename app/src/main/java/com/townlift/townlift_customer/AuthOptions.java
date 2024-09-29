@@ -115,27 +115,27 @@ public class AuthOptions extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         // Set up Facebook login button
-        fbLoginButton = findViewById(R.id.cmd_continue_facebook);
-        fbLoginButton.setOnClickListener(v -> {
-            LoginManager.getInstance().logInWithReadPermissions(AuthOptions.this, Arrays.asList("email", "public_profile"));
-            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    handleFacebookAccessToken(loginResult.getAccessToken());
-                }
-
-                @Override
-                public void onCancel() {
-                    Toast.makeText(AuthOptions.this, "Facebook login canceled", Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onError(FacebookException error) {
-                    Log.e("FacebookLoginError", "Error during Facebook login: ", error);
-                    Toast.makeText(AuthOptions.this, "Error during Facebook login", Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
+//        fbLoginButton = findViewById(R.id.cmd_continue_facebook);
+//        fbLoginButton.setOnClickListener(v -> {
+//            LoginManager.getInstance().logInWithReadPermissions(AuthOptions.this, Arrays.asList("email", "public_profile"));
+//            LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+//                @Override
+//                public void onSuccess(LoginResult loginResult) {
+//                    handleFacebookAccessToken(loginResult.getAccessToken());
+//                }
+//
+//                @Override
+//                public void onCancel() {
+//                    Toast.makeText(AuthOptions.this, "Facebook login canceled", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onError(FacebookException error) {
+//                    Log.e("FacebookLoginError", "Error during Facebook login: ", error);
+//                    Toast.makeText(AuthOptions.this, "Error during Facebook login", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        });
 
         // Set up Biometric authentication
         setupBiometricPrompt();

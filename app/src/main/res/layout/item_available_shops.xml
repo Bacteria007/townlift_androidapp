@@ -133,6 +133,7 @@
                             android:paddingVertical="4dp">
 
                             <ImageView
+                                android:id="@+id/rating_star"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

@@ -93,9 +93,9 @@ public class NewOrder extends AppCompatActivity {
             e.printStackTrace();
         }
         recyclerView = findViewById(R.id.msg_list_recycler_view);
-        messageAdapter = new MessageAdapter(messages, userId);
-        recyclerView.setAdapter(messageAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        messageAdapter = new MessageAdapter(messages, userId, true);
+        recyclerView.setAdapter(messageAdapter);
         // Add TextWatcher to EditText
         msgInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -208,7 +208,9 @@ public class NewOrder extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        socketManager.disconnect(onNewMessage);
+        socketManager.disconnect(onNewMessage);
     }
+
+
 
 }

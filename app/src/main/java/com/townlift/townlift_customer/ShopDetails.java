@@ -5,6 +5,7 @@ import static com.townlift.townlift_customer.services.URLConstants.BASE_URL;
 import static com.townlift.townlift_customer.services.URLConstants.CREATE_NEW_CONVERSATION_URL;
 import static com.townlift.townlift_customer.services.URLConstants.GET_SHOP_DETAILS_URL;
 import static com.townlift.townlift_customer.services.URLConstants.GET_USER_PREVIOUS_ORDERS_URL;
+import static com.townlift.townlift_customer.services.URLConstants.REMOVE_SHOP_FROM_FAVORITES_URL;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -57,7 +58,7 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
     ImageView cmdNavBack;
     ImageView shopImageView, imgRatingStar;
     private ShimmerFrameLayout shimmerFrameLayout;
-    int shopId, adminId;
+    int shopId, adminId, userId;
     SharedPreferences userPreferences;
     LinearLayout shopDetailsCard;
     Button cmdNewOrder;
@@ -74,7 +75,7 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
         EdgeToEdge.enable(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(0, 0, systemBars.right, systemBars.bottom);
             return insets;
         });
 
@@ -98,10 +99,25 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
             apiCreateNewConversation();
         });
         cmdNavBack.setOnClickListener(v -> onBackPressed());
-        cmdAddToFav.setOnClickListener(v -> apiAddShopToFavorites());
-        userPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         shopId = getIntent().getIntExtra("id", -1);
+        userPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        userId = userPreferences.getInt("id", -1);
 
+        cmdAddToFav.setOnClickListener(v -> {
+            try {
+                // Toggle favorite state based on current icon
+                boolean isShopFav = shopDetails.getBoolean("is_favorite");
+
+                if (isShopFav) {
+                    apiRemoveShopFromFavorites();
+                } else {
+                    apiAddShopToFavorites();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                SnackbarUtils.showErrorSnackbar(this, "Failed to update favorites");
+            }
+        });
 
         shimmerFrameLayout.startShimmer();
         try {
@@ -120,41 +136,8 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
     }
 
 
-    void apiAddShopToFavorites() {
-        int userId = userPreferences.getInt("id", -1);
-        int shopId = getIntent().getIntExtra("id", -1);
-        if (userId == -1 || shopId == -1) {
-            SnackbarUtils.showErrorSnackbar(this, "Invalid User or Shop ID");
-            return;
-        }
 
-        String url = String.format("%s%d%s%d", ADD_SHOP_TO_FAVORITES_URL, userId, "/", shopId);
-        RequestQueue queue = Volley.newRequestQueue(this);
 
-        // Create a new request
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
-                    try {
-                        JSONObject jsonResponse = new JSONObject(response);
-                        // Handle successful response
-                        apiGetShopDetails();
-                        System.out.println("Response: " + jsonResponse.toString());
-                        SnackbarUtils.showSuccessSnackbar(this, "Shop added to favorites!");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        SnackbarUtils.showErrorSnackbar(this, "Failed to parse response");
-                    }
-                },
-                error -> {
-                    // Handle error
-                    SnackbarUtils.showErrorSnackbar(this, "Failed to add shop to favorites");
-                }
-        );
-
-        // Add the request to the queue
-        queue.add(stringRequest);
-
-    }
 
     void apiGetShopDetails() throws JSONException {
         int shopId = getIntent().getIntExtra("id", -1);
@@ -171,12 +154,15 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
         JSONObject postData = new JSONObject();
         try {
             postData.put("userId", userId);
+            System.out.println("postData: " + postData.toString());
             new Handler().postDelayed(() -> {
                 ServiceProvider.getInstance(this).sendPostRequest(this, url, postData,
                         response -> {
 
                             JSONObject data = (JSONObject) response;
-                            System.out.println("Response: " + data.toString());
+                            Log.d("URL>>>>>>>>>>", "Fetchd Shop details: " + url);
+                            Log.d("ShopDetails", "Fetchd Shop details: " + data.toString());
+
                             try {
                                 shopDetails = data;
                                 adminId = data.getInt("admin_id");
@@ -197,10 +183,11 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
                                 Glide.with(this).load(BASE_URL + data.getString("image")).into(shopImageView);
                                 boolean isShopFav = data.getBoolean("is_favorite");
                                 if (isShopFav) {
-                                    cmdAddToFav.setImageResource(R.drawable.heart_filled_24);
+                                    cmdAddToFav.setImageResource(R.drawable.heart_filled_24);  // Shop is in favorites
                                 } else {
-                                    cmdAddToFav.setImageResource(R.drawable.heart_outline_24);
+                                    cmdAddToFav.setImageResource(R.drawable.heart_outline_24);  // Shop is not in favorites
                                 }
+
                             } catch (JSONException e) {
                                 shimmerFrameLayout.stopShimmer();
                                 shimmerFrameLayout.setVisibility(View.GONE);
@@ -230,6 +217,61 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
 
     }
 
+    void apiAddShopToFavorites() {
+        if (userId == -1 || shopId == -1) {
+            SnackbarUtils.showErrorSnackbar(this, "Invalid User or Shop ID");
+            return;
+        }
+
+        String url = String.format("%s%d%s%d", ADD_SHOP_TO_FAVORITES_URL, userId, "/", shopId);
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        apiGetShopDetails();  // Refresh the details and update UI
+                        SnackbarUtils.showSuccessSnackbar(this, "Shop added to favorites!");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        SnackbarUtils.showErrorSnackbar(this, "Failed to parse response");
+                    }
+                },
+                error -> {
+                    SnackbarUtils.showErrorSnackbar(this, "Failed to add shop to favorites");
+                });
+
+        queue.add(stringRequest);
+    }
+
+    void apiRemoveShopFromFavorites() {
+        if (userId == -1 || shopId == -1) {
+            SnackbarUtils.showErrorSnackbar(this, "Invalid User or Shop ID");
+            return;
+        }
+
+        String url = String.format("%s%d%s%d", REMOVE_SHOP_FROM_FAVORITES_URL, userId, "/", shopId);
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        apiGetShopDetails();  // Refresh the details and update UI
+                        SnackbarUtils.showSuccessSnackbar(this, "Shop removed from favorites!");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        SnackbarUtils.showErrorSnackbar(this, "Failed to parse response");
+                    }
+                },
+                error -> {
+                    SnackbarUtils.showErrorSnackbar(this, "Failed to remove shop from favorites");
+                });
+
+        queue.add(stringRequest);
+    }
+
+
     void apiCreateNewConversation() {
         JSONObject newConversationData = new JSONObject();
         try {
@@ -242,7 +284,6 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
             ServiceProvider.getInstance(this).sendPostRequest(this, CREATE_NEW_CONVERSATION_URL, newConversationData,
                     response -> {
                         JSONObject data = (JSONObject) response;
-                        System.out.println("Response: " + data.toString());
 
                         JSONObject conversation = null;
                         try {
@@ -300,14 +341,23 @@ public class ShopDetails extends AppCompatActivity implements PreviousOrdersAdap
 
     @Override
     public void onItemClick(int position) throws JSONException {
+        // Get the selected order object from the list
         JSONObject selectedOrder = orderList.get(position);
 
-        String selectedOrderString = selectedOrder.toString();
+        // Extract the order id
+        int orderId = selectedOrder.getInt("id");
 
         // Create an Intent to start the OrderDetails activity
         Intent intent = new Intent(ShopDetails.this, OrderDetails.class);
-        // Put the JSON String into the Intent
-        intent.putExtra("order_details", selectedOrderString);
+
+        // Put the order id as an integer extra in the Intent
+        intent.putExtra("order_id", orderId);
+
+        // Log for debugging
+        Log.d("OrderDetails", "Selected Order ID: " + orderId);
+
+        // Start the OrderDetails activity
         startActivity(intent);
     }
+
 }

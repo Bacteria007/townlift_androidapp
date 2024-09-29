@@ -78,7 +78,7 @@ public class OrderDetails extends AppCompatActivity {
         });
         headerTitle.setText("Order Details");
         cmdNavBack.setOnClickListener(v -> onBackPressed());
-        txtRateOrder.setOnClickListener(v -> openRateOrderBottomSheet());
+
         // Get the Intent and extract the JSON String
         Intent intent = getIntent();
         userPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -87,7 +87,7 @@ public class OrderDetails extends AppCompatActivity {
         if (orderId != -1) {
             apiGetOrderDetailsAndMessages(orderId);
         }
-
+        txtRateOrder.setOnClickListener(v -> openRateOrderBottomSheet(orderId));
         // Initialize RecyclerView and its adapter
         orderChatRecyclerView = findViewById(R.id.order_chat_recyclerview);
         orderChatAdapter = new MessageAdapter(orderChatList, userPreferences.getInt("id", -1), false); // Pass false
@@ -144,7 +144,7 @@ public class OrderDetails extends AppCompatActivity {
     }
 
 
-    private void openRateOrderBottomSheet() {
+    private void openRateOrderBottomSheet(int orderId) {
 
         BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(OrderDetails.this);
         View sheetView = LayoutInflater.from(getApplicationContext())
